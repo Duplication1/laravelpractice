@@ -1,0 +1,68 @@
+<?php
+
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('home');
+});
+
+
+Route::get('/jobs', function () {
+    return view('jobs', [
+        'jobs' =>[
+            [
+                'id' => 1,
+                'title' => 'Director',
+                'salary' => '$50,00',
+            ],
+            [
+                'id' => 2,
+                'title' => 'Teacher',
+                'salary' => '$500,00',
+            ],
+            [
+                'id' => 3,
+                'title' => 'Engineer',
+                'salary' => '$50000,00',
+            ],
+            [
+                'id' => 4,
+                'title' => 'Designer',
+                'salary' => '$5000,00',
+            ]
+    ]
+    ]);
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/jobs/{id}', function ($id) {
+    $jobs = [
+        [
+            'id' => 1,
+            'title' => 'Director',
+            'salary' => '$50,00',
+        ],
+        [
+            'id' => 2,
+            'title' => 'Teacher',
+            'salary' => '$500,00',
+        ],
+        [
+            'id' => 3,
+            'title' => 'Engineer',
+            'salary' => '$50000,00',
+        ],
+        [
+            'id' => 4,
+            'title' => 'Designer',
+            'salary' => '$5000,00',
+        ]
+    ];
+    $job = Arr::first($jobs, fn($job) => $job['id'] == $id);
+    return view('job', ['job' => $job]);
+});
+
