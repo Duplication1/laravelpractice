@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_listings', function (Blueprint $table) {
+        Schema::create('post_tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Employer::class);
-            $table->string('title');
-            $table->string('salary');
+            $table->foreignIdFor(\App\Models\Post::class, 'post_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Tag::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_listings');
+        Schema::dropIfExists('post_tags');
     }
 };
